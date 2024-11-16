@@ -5,6 +5,7 @@ import { ProfilePageComponent } from '../ProfilePageComponent/ProfilePageCompone
 import { SettingsPageComponent } from '../SettingsPageComponent/SettingsPageComponent.js';
 import { FriendsPageComponent } from '../FriendsPageComponent/FriendsPageComponent.js';
 import { GearRecComponent } from '../GearRecComponent/GearRecComponent.js';
+import { CurrentTripComponent } from '../CurrentTripComponent/CurrentTripComponent.js';
 
 export class AppControllerComponent {
   #container = null;
@@ -26,7 +27,7 @@ export class AppControllerComponent {
     this.#dynamicSidebarComponent.render();
 
     // Render Home page initially
-    this.#renderPage('Home');
+    this.#renderPage();
 
     // Append container to body or specific parent
     document.body.appendChild(this.#container);
@@ -48,7 +49,7 @@ export class AppControllerComponent {
 
   #attachEventListeners() {
     // Listen for navigation events from the sidebar
-    this.#hub.subscribe("NavigateToPage", (page) => {
+    this.#hub.subscribe('NavigateToPage', (page) => {
       this.#renderPage(page);
     });
   }
@@ -72,7 +73,7 @@ export class AppControllerComponent {
         pageComponent = new FriendsPageComponent();
         break;
       default:
-        pageComponent = new MainPageComponent(); // Default to Home
+        pageComponent = new CurrentTripComponent(); // Default to Home
     }
 
     // Append the selected page component
